@@ -20,4 +20,9 @@ I removed the hard-coded values from the code. The order-service now gets the Ra
 Environment variables let me use the same code in different places, like testing and production, by changing only the settings. They also keep passwords and secrets out of the code, so they don't end up on GitHub. And if something changes, like an IP address, I can update it without touching the code.
 
 ### 3. Why have a separate repository for each microservice?
-Each service can be updated and deployed on its own without affecting the others. If one service has a problem, the other services keep working. It also makes it easier to scale one service, or
+Each service can be updated and deployed on its own without affecting the others. If one service has a problem, the other services keep working. It also makes it easier to scale one service, or even rewrite it in another language, without changing the rest of the app.
+
+## Challenges I Faced
+- My student Azure account only allows 6 vCPUs, so I put the store-front VM in a different region (Belgium Central). It still works because all the services talk to each other using public IPs.
+- My RabbitMQ password has an `@` symbol, so I had to write it as `%40` in the connection string.
+- My SSH connection kept dropping, so I used `tmux` to keep the services running in the background.
